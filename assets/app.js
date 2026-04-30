@@ -284,6 +284,13 @@ document.addEventListener("DOMContentLoaded", init);
 async function init() {
   setupDataSource();
   state.summaries = await loadProfileSummaries();
+
+  if (!state.summaries.length) {
+    state.source = "Local fallback";
+    els.dataStatus.textContent = state.source;
+    state.summaries = LOCAL_PROFILES.map(toProfileSummary);
+  }
+
   renderProfileOptions(state.summaries);
 
   els.select.addEventListener("change", () => {
@@ -326,6 +333,13 @@ async function loadProfileSummaries() {
 
   if (error) {
     console.warn("Failed to load Supabase summaries. Falling back locally.", error);
+    state.source = "Local fallback";
+    els.dataStatus.textContent = state.source;
+    return LOCAL_PROFILES.map(toProfileSummary);
+  }
+
+  if (!data?.length) {
+    console.warn("Supabase returned no published profiles. Falling back locally.");
     state.source = "Local fallback";
     els.dataStatus.textContent = state.source;
     return LOCAL_PROFILES.map(toProfileSummary);
@@ -381,8 +395,10 @@ function renderProfile(profile) {
 
   els.coverImage.src = profile.cover_url || "";
   els.coverImage.alt = profile.cover_url ? `${profile.name} 的封面圖` : "";
+  bindImageFallback(els.coverImage);
   els.avatarImage.src = profile.avatar_url || "";
   els.avatarImage.alt = profile.avatar_url ? `${profile.name} 的照片` : "";
+  bindImageFallback(els.avatarImage);
   els.avatarFallback.textContent = getInitials(profile.name);
 
   els.username.textContent = `@${profile.username}`;
@@ -539,6 +555,7 @@ function renderProjects(projects) {
     const image = document.createElement("img");
     image.src = project.image_url || "";
     image.alt = project.image_url ? `${project.title} 專案圖片` : "";
+    bindImageFallback(image);
     imageWrap.append(image);
 
     const body = document.createElement("div");
@@ -792,4 +809,15 @@ function splitTech(techStack = "") {
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function bindImageFallback(image) {
+  image.hidden = !image.getAttribute("src");
+  image.onerror = () => {
+    image.hidden = true;
+    image.removeAttribute("src");
+  };
+  image.onload = () => {
+    image.hidden = false;
+  };
 }

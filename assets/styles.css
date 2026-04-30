@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   min-height: 100%;
   background: var(--bg);
@@ -314,6 +318,21 @@ main {
   font-weight: 700;
 }
 
+.profile-links a {
+  display: grid;
+  grid-template-columns: minmax(74px, max-content) minmax(0, 1fr);
+}
+
+.profile-links a span,
+.project-links a span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.profile-links a span {
+  text-align: right;
+}
+
 .profile-links a:hover,
 .project-links a:hover {
   border-color: var(--accent);
@@ -597,6 +616,16 @@ h2 {
 
   .data-status {
     display: none;
+  }
+
+  .profile-links a {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .profile-links a span {
+    text-align: left;
+    font-size: 0.95rem;
   }
 
   main {
