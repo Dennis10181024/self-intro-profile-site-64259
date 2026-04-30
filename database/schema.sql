@@ -153,6 +153,25 @@ CREATE INDEX IF NOT EXISTS awards_profile_id_idx ON public.awards(profile_id);
 CREATE INDEX IF NOT EXISTS languages_profile_id_idx ON public.languages(profile_id);
 CREATE INDEX IF NOT EXISTS interests_profile_id_idx ON public.interests(profile_id);
 
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+
+GRANT SELECT ON public.profiles TO anon, authenticated;
+GRANT SELECT ON public.profile_links TO anon, authenticated;
+GRANT SELECT ON public.highlights TO anon, authenticated;
+GRANT SELECT ON public.education TO anon, authenticated;
+GRANT SELECT ON public.experiences TO anon, authenticated;
+GRANT SELECT ON public.projects TO anon, authenticated;
+GRANT SELECT ON public.project_links TO anon, authenticated;
+GRANT SELECT ON public.skill_categories TO anon, authenticated;
+GRANT SELECT ON public.skills TO anon, authenticated;
+GRANT SELECT ON public.certifications TO anon, authenticated;
+GRANT SELECT ON public.awards TO anon, authenticated;
+GRANT SELECT ON public.languages TO anon, authenticated;
+GRANT SELECT ON public.interests TO anon, authenticated;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT ON TABLES TO anon, authenticated;
+
 CREATE OR REPLACE FUNCTION public.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
