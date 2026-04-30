@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>自我介紹網站</title>
+    <meta
+      name="description"
+      content="可連接 Supabase PostgreSQL 的多人自我介紹網站模板"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="回到首頁">
+        <span class="brand-mark">ID</span>
+        <span>Profile Cloud</span>
+      </a>
+
+      <div class="toolbar" aria-label="頁面工具">
+        <label class="select-label" for="profileSelect">頁面</label>
+        <select id="profileSelect" class="profile-select"></select>
+        <button id="copyLinkButton" class="icon-button" type="button" title="複製此人的頁面連結">
+          <span aria-hidden="true">↗</span>
+          <span class="sr-only">複製連結</span>
+        </button>
+        <span id="dataStatus" class="data-status">Local data</span>
+      </div>
+    </header>
+
+    <main>
+      <div id="loadingState" class="loading-state">載入個人資料中...</div>
+
+      <section id="profileShell" class="profile-shell" hidden>
+        <aside class="identity-panel" aria-labelledby="profileName">
+          <div class="cover-frame">
+            <img id="coverImage" alt="" />
+          </div>
+
+          <div class="identity-body">
+            <div class="avatar" aria-hidden="true">
+              <img id="avatarImage" alt="" />
+              <span id="avatarFallback"></span>
+            </div>
+
+            <p id="profileUsername" class="eyebrow"></p>
+            <h1 id="profileName"></h1>
+            <p id="profileTitle" class="profile-title"></p>
+
+            <dl class="quick-facts">
+              <div>
+                <dt>生日</dt>
+                <dd id="profileBirthday"></dd>
+              </div>
+              <div>
+                <dt>地點</dt>
+                <dd id="profileLocation"></dd>
+              </div>
+            </dl>
+
+            <div id="profileLinks" class="profile-links"></div>
+          </div>
+        </aside>
+
+        <div class="content-panel">
+          <section class="intro-section section-band">
+            <div>
+              <p class="section-kicker">About</p>
+              <h2>簡介</h2>
+              <p id="profileBio" class="lead"></p>
+            </div>
+            <div id="highlightGrid" class="highlight-grid"></div>
+          </section>
+
+          <section class="section-band">
+            <div class="section-heading">
+              <p class="section-kicker">Education</p>
+              <h2>學歷</h2>
+            </div>
+            <div id="educationList" class="timeline"></div>
+          </section>
+
+          <section class="section-band">
+            <div class="section-heading">
+              <p class="section-kicker">Experience</p>
+              <h2>經歷</h2>
+            </div>
+            <div id="experienceList" class="timeline"></div>
+          </section>
+
+          <section class="section-band">
+            <div class="section-heading">
+              <p class="section-kicker">Projects</p>
+              <h2>專案</h2>
+            </div>
+            <div id="projectGrid" class="project-grid"></div>
+          </section>
+
+          <section class="section-band split-section">
+            <div>
+              <div class="section-heading">
+                <p class="section-kicker">Skills</p>
+                <h2>技能</h2>
+              </div>
+              <div id="skillGroups" class="skill-groups"></div>
+            </div>
+
+            <div>
+              <div class="section-heading">
+                <p class="section-kicker">More</p>
+                <h2>更多資料</h2>
+              </div>
+              <div id="moreInfo" class="more-info"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="notFoundState" class="not-found" hidden>
+        <p class="section-kicker">Profile not found</p>
+        <h1>找不到這位朋友的頁面</h1>
+        <p>請確認網址中的 username，或從上方選單切換到已建立的頁面。</p>
+      </section>
+    </main>
+
+    <template id="emptyTemplate">
+      <p class="empty-text">尚未填寫</p>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/config.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

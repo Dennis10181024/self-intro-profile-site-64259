@@ -1,0 +1,13 @@
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Local-only environment files
+.env
+.env.*
