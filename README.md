@@ -37,6 +37,8 @@ window.SUPABASE_CONFIG = {
 
 如果網站右上角顯示 `Local fallback`，且 Supabase API 回 `permission denied for table profiles`，請在 Supabase SQL Editor 執行 `database/fix-data-api-grants.sql`。
 
+如果 Supabase 表格裡明明有資料，但網站仍顯示 `尚未填寫`，請在 Supabase SQL Editor 執行 `database/fix-public-read-policies.sql`。
+
 ## 正式上線
 
 完整部署步驟請看 `DEPLOY.md`。這個專案可以直接部署到 Netlify 或 GitHub Pages，不需要 build 指令。
