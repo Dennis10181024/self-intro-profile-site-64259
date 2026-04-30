@@ -448,6 +448,8 @@ function renderLinks(container, links) {
 
     const value = document.createElement("span");
     value.textContent = link.value || "開啟";
+    value.title = link.value || link.url || "";
+    anchor.title = link.value || link.url || link.label;
     anchor.append(value);
     container.append(anchor);
   });

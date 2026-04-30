@@ -55,3 +55,5 @@ window.SUPABASE_CONFIG = {
 - `interests`：興趣或研究方向
 
 只要 `profiles.is_published = TRUE`，網址就能用 `index.html?u=你的username` 開啟。
+
+最快方式是複製 `database/add-profile-template.sql`，改成朋友的資料，然後貼到 Supabase SQL Editor 執行。
