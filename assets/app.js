@@ -261,6 +261,7 @@ const els = {
   dataStatus: document.querySelector("#dataStatus"),
   select: document.querySelector("#profileSelect"),
   copyLinkButton: document.querySelector("#copyLinkButton"),
+  coverFrame: document.querySelector("#coverFrame"),
   coverImage: document.querySelector("#coverImage"),
   avatarImage: document.querySelector("#avatarImage"),
   avatarFallback: document.querySelector("#avatarFallback"),
@@ -390,6 +391,7 @@ async function loadProfile(username) {
 
 function renderProfile(profile) {
   els.root.style.setProperty("--accent", profile.theme_color || "#0f766e");
+  els.coverFrame.style.setProperty("--accent", profile.theme_color || "#0f766e");
   document.title = `${profile.name} | 自我介紹`;
   els.select.value = profile.username;
 
